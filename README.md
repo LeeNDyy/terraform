@@ -12,13 +12,6 @@ export YC_CLOUD_ID=$(yc config get cloud-id)
 export YC_FOLDER_ID=$(yc config get folder-id)
 ```
 
-
-Куда смотреть за мануалами
-
-1. https://yandex.cloud/ru/docs/terraform/tutorials/terraform-modules#configure-terraform
-
-2. https://yandex.cloud/ru/docs/tutorials/infrastructure-management/terraform-quickstart#install-terraform
-
 ## start terraform
 
 ```bash
@@ -32,3 +25,15 @@ terraform apply
 ```bash
 yc compute instance list
 ```
+
+## Conncetion
+
+```bash
+ssh -l ubuntu <ip_address> -i <your_private_key> 
+```
+
+Куда смотреть за мануалами
+
+1. https://yandex.cloud/ru/docs/terraform/tutorials/terraform-modules#configure-terraform
+
+2. https://yandex.cloud/ru/docs/tutorials/infrastructure-management/terraform-quickstart#install-terraform
