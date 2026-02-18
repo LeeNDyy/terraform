@@ -36,9 +36,9 @@ resource "yandex_compute_instance" "lendy" {
 
   metadata = {
     user-data = file("${path.module}/users.yaml")
-    # ssh-keys = <<-EOT
-    # qwerty:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGLEaYmNInYEjTvkTzqVfisvIur5FeT5zM2a2szHNPvS lendy@fedora
-    # EOT
+    ssh-keys = <<-EOT
+    lendy:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGLEaYmNInYEjTvkTzqVfisvIur5FeT5zM2a2szHNPvS lendy@fedora
+    EOT
   }
 
   scheduling_policy {
