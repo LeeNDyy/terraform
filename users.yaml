@@ -10,4 +10,4 @@ users:
     sudo: ALL=(ALL) NOPASSWD:ALL
     shell: /bin/bash
     ssh-authorized-keys:
-      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPExEGlnItCDH8O+qVcbdOjtnk4UxQ7DhTtXys76gzLU lendy@fedora
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOSXMTBS9BTLLyqbP9kG7G7a+whg3GE1H4lkKLI1ccJq lendy@fedora

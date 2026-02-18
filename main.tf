@@ -35,10 +35,13 @@ resource "yandex_compute_instance" "lendy" {
 
 
   metadata = {
-    user-data = file("users.yaml")
-    ssh-keys  = <<-EOT
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPExEGlnItCDH8O+qVcbdOjtnk4UxQ7DhTtXys76gzLU lendy@fedora 
-    EOT
+    user-data = file("${path.module}/users.yaml")
+    # user-data = file("users.yaml")
+    # ssh-keys  = <<-EOT
+    # root:ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOSXMTBS9BTLLyqbP9kG7G7a+whg3GE1H4lkKLI1ccJq # lendy@fedora 
+    # EOT
+    ssh-keys = file("/home/lendy/.ssh/id_ed1.pub")
+    # user-data = file("users.yaml")
   }
 
   scheduling_policy {
@@ -48,6 +51,10 @@ resource "yandex_compute_instance" "lendy" {
   platform_id = "standard-v3"
   zone = "ru-central1-b"
 }
+
+
+
+#any steps for create vm, doesn't matter right now
 
 # # 4. Security Group (SSH)
 # resource "yandex_vpc_security_group" "ssh" {
@@ -76,85 +83,6 @@ resource "yandex_compute_instance" "lendy" {
 #     "${vm.network_interface[0].nat_ip_address} (lendy-${vm.name})"
 #   ]
 # }
-
-
-# data "yandex_compute_image" "ubuntu" {
-#   family = "ubuntu-2204-lts"
-# }
-
-
-# resource "yandex_compute_disk" "boot-disk-1" {
-#   count = 2
-
-#   name     = "disk-ubuntu-lendy-${count.index}"
-#   type     = "network-ssd"
-#   zone     = "ru-central1-b"
-#   size     = 10
-#   image_id = data.yandex_compute_image.ubuntu.id 
-# }
-
-# resource "yandex_vpc_network" "network-1" {
-#   name           = "network-1"
-# }
-
-# resource "yandex_vpc_subnet" "subnet-1" {
-#   name           = "subnet-1"
-#   zone           = "ru-central1-b"
-#   network_id     = yandex_vpc_network.network-1.id
-#   v4_cidr_blocks = ["192.168.10.0/24"]
-# }
-
-
-# resource "yandex_compute_instance" "lendy" {
-#   count = 2
-
-#   name        = "terraform1-${count.index}"
-#   platform_id = "standard-v3"
-
-#   resources {
-#     memory = 1
-#     cores  = 2
-#   }
-
-#   boot_disk {
-#     disk_id = yandex_compute_disk.boot-disk-1[count.index].id
-#   }
-
-#   network_interface {
-#     subnet_id = yandex_vpc_subnet.subnet-1.id
-#     nat       = true
-#   }
-
-#   metadata = {
-#     user-data = file("users.yaml")
-#   }
-
-#   scheduling_policy {
-#     preemptible = true
-#   }
-
-#   zone = "ru-central1-b"
-# }
-
-
-# output "internal_ip_address_vm_1" {
-#   value = yandex_compute_instance.lendy[0].network_interface[0].ip_address
-# }
-
-# output "external_ip_address_vm_1" {
-#   value = yandex_compute_instance.lendy[0].network_interface[0].nat_ip_address
-# }
-
-
-# output "internal_ip_address_vm_2" {
-#   value       = yandex_compute_instance.vm-2.network_interface.0.ip_address
-# }
-
-# output "internal_ip_address_vm_2" {
-#   value       = yandex_compute_instance.vm-2.network_interface.0.nat_ip_address
-# }
-
-
 
 
 
